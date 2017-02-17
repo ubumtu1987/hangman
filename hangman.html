@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Hangman</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class = "row">
+          <div class ="col-md-12 middleBox">
+         
+          <p>Hangman<p>
+          
+          </div>
+      </div> 
+
+      <div class= "row s">
+          <div class ="col-md-2 back">
+          </div>
+          <div class ="col-md-8 picture">
+            <img src="images/File_000.png" id = "mainDisplay">
+           
+            
+          </div>
+          <div class ="col-md-2 back">
+          </div>
+          
+
+      </div>
+
+      <div class = "row alpha">
+          <div class ="col-md-2 show">
+          </div>
+          <div class ="col-md-8 show">
+          
+            <div class="text-center showAlphabet">
+               <div ID = "wordMan">
+               </div>
+            </div> 
+
+          </div>
+          <div class ="col-md-2 show">
+          </div>
+      </div>
+      <div class = "row alpha">
+          <div class = "col-md-6 order maker">
+            <div ID = "direction">
+            </div>
+          </div>
+
+          <div class = "col-md-6 storedAlphabet maker">
+            <div ID = "gmessage">
+            </div>
+          </div> 
+  
+      </div>
+      <div class ="row alpha">
+          <div class = "col-md-12 lifeman">
+            <div class="text-center GG">
+              <div ID = "mylife">
+              </div>
+            </div>
+          </div>
+          
+      </div>
+      <div class ="row alpha">
+          <div class = "col-md-12 lifeman">
+            <div class="text-center GG">
+              <div ID = "answer">
+              </div>
+            </div>
+          </div>
+          
+      </div>
+
+      <div class ="row buttonman">
+          <div class = "col-md-3">
+          </div>
+          <div class = "col-md-3 start Modifeid">
+             <div ID = "startB"> Start!
+             </div>
+          </div>
+          <div class = "col-md-3 reset Modifeid">
+             <div ID = "resetB">Reset!
+             </div>
+          </div>
+          <div class = "col-md-3">
+          </div>
+
+      </div>
+
+
+    </div>
+   
+    <script type="text/javascript">
+    
+
+     $(document).ready(function() {
+      $("#startB").on("click", function() {
+           $("#direction").html("Type Your Guess through keyboard");
+      
+
+      
+      var alphabet = "problem";
+   
+      var life  = 7;
+
+      var showingWord= "";  
+
+      
+
+      var compareWord = "";
+      
+      var test = false; 
+     
+      var collector = [];
+
+      console.log("Hello! Game Start!")
+
+      
+
+
+         if(compareWord == "" ){
+              for( var i = 0 ; i < alphabet.length ; i++){
+              compareWord = "_"+compareWord;     
+              }
+          }  
+         
+         
+          
+          
+          document.onkeyup = function(event) {
+        
+          if(life <= 0) {
+             $("#direction").html("You are dead!");
+ 
+          }else{
+          console.log(compareWord);
+          console.log(event.key);
+          var guess = event.key;
+          var showingGuess = "";
+
+          guess = ""+ guess;
+          test = false; 
+          var division = true; 
+          
+          if(collector != null){
+
+           for( var c  = 0 ; c < collector.length ; c ++){
+               if(collector[c] == guess){
+                  division = false;
+               }
+            } 
+          }    
+         
+         if(division == false ){
+            console.log(compareWord);
+            $("#direction").html("You alreay chose this alphabet!");
+      
+
+            console.log("retype the new alphabet");
+
+         }else{
+
+
+
+
+
+              for( var i = 0; i < alphabet.length ; i++){
+
+                   var temp = ""; 
+
+                     if(alphabet.charAt(i) == guess){
+                              test=true; 
+                              for(var j = 0 ; j < alphabet.length ; j++ ){ 
+                                
+                                if(i == j ){
+                                 
+                                temp =temp + guess;
+                                }else{
+                                temp = temp +compareWord.charAt(j); 
+                                }
+                             
+                              }
+                     
+                     compareWord = temp;
+
+                  }
+             }   
+
+
+             console.log(compareWord);
+              if(test == false){
+                life--;
+                $("#direction").html("Your guess is wrong!");
+      
+                console.log("your lief : " + life );
+              }else{
+                $("#direction").html("Your guess is right!");
+                console.log("your lief : " + life)
+              }
+
+            
+
+              
+             
+
+
+               collector.push(guess);
+               console.log(collector);
+               
+               showingWord=""; 
+
+             
+               for( var i = 0 ; i < compareWord.length ; i++){
+                 showingWord = showingWord+compareWord[i]+ " ";     
+                }
+                 
+              
+
+
+              $("#wordMan").html(showingWord+"");
+
+
+              for( var i = 0 ; i <  collector.length ; i++){
+                  showingGuess = showingGuess+collector[i] +", " ;
+
+              }
+               $("#gmessage").html("Your Guess : "+showingGuess);
+
+            
+               $("#mylife").html("Mylife : "+life );
+
+               if(life <= 0 ){
+                $("#direction").html("GameOver");
+                $("#answer").html("Answer : "+ alphabet);
+                 alert("GameOver");
+                
+               } 
+
+              
+               if(compareWord == alphabet){
+                 alert("Correct!");
+                 $("#direction").html("Correct!");
+                 life= 0 ;
+                
+               }
+
+
+
+
+             
+           }
+        
+         }//if  
+
+
+        }  
+       
+
+       
+    });     
+
+  });
+    </script>
+    
+  </body>
+</html>
