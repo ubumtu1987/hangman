@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Hangman</title>
@@ -20,7 +20,7 @@
       <div class= "row s">
           <div class ="col-md-2 back">
           </div>
-          <div class ="col-md-8 picture">
+          <div class ="col-md-8 picture" id = "lifeDis">
             <img src="images/File_000.png" id = "mainDisplay">
            
             
@@ -269,24 +269,37 @@
                
 
               if(life>0){
+
                 if(life == 6){
-                  mainDisplaySpace.innerHTML= '<img src="{!Resource.images/File_001.png}" />';
+                 
+                  document.getElementById("lifeDis").innerHTML='<img src="images/File_001.png" id = "mainDisplay">';
+
 
 
                 }
                 if(life == 5){
+                  document.getElementById("lifeDis").innerHTML='<img src="images/File_002.png" id = "mainDisplay">';
+
                   
                 }
                 if(life == 4){
-                  
+                  document.getElementById("lifeDis").innerHTML='<img src="images/File_003.png" id = "mainDisplay">';
+
+
                 }
                 if(life == 3){
+                  document.getElementById("lifeDis").innerHTML='<img src="images/File_004.png" id = "mainDisplay">';
+
                   
                 }
                 if(life == 2){
+                   document.getElementById("lifeDis").innerHTML='<img src="images/File_005.png" id = "mainDisplay">';
+
                   
                 }
                 if(life == 1){
+                  document.getElementById("lifeDis").innerHTML='<img src="images/File_006.png" id = "mainDisplay">';
+
                   
                 }
           
@@ -296,6 +309,8 @@
 
 
                if(life <= 0 ){
+                 document.getElementById("lifeDis").innerHTML='<img src="images/File_007.png" id = "mainDisplay">';
+
                 directionSpace.innerHTML="GameOver";
                 answerSpace.innerHTML="Answer : "+ alphabet;
                 collector= [];
