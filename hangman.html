@@ -80,7 +80,7 @@
           <div class = "col-md-3">
           </div>
           <div class = "col-md-3 start Modifeid">
-             <div ID = "startB"> Start!
+             <div ID = "startB" onclik= "function()" > Start!
              </div>
           </div>
           <div class = "col-md-3 reset Modifeid">
@@ -99,9 +99,7 @@
    
     <script type="text/javascript">
     
-
-     $(document).ready(function() {
-      $("#startB").on("click", function() {
+      document.getElementById("startB").onclick = function () {
 
       var mainDisplaySpace =document.getElementById("mainDisplay");
       
@@ -160,6 +158,7 @@
         
         answerSpace.innerHTML="";
          
+        mylifeSpace.innerHTML="Mylife : "+life ; 
           
           
           document.onkeyup = function(event) {
@@ -326,9 +325,9 @@
        
 
        
-    });     
+    } ;   
 
-  });
+ 
     </script>
     
   </body>
